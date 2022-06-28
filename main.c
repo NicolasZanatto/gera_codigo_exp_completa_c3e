@@ -41,7 +41,7 @@
 
 /***********************************************************************************/
 /*                                                                                 */
-/*  INï¿½CIO DO Lï¿½XICO - Nï¿½o entre a nï¿½o ser que tenha interesse pessoal em lï¿½xicos  */
+/*  INÃ¯Â¿Â½CIO DO LÃ¯Â¿Â½XICO - NÃ¯Â¿Â½o entre a nÃ¯Â¿Â½o ser que tenha interesse pessoal em lÃ¯Â¿Â½xicos  */
 /*                                                                                 */
 /***********************************************************************************/
 
@@ -94,7 +94,7 @@ FILE *arqin;
 int token;
 char lex[20];
 
-// variï¿½veis do marca - restaura
+// variÃ¯Â¿Â½veis do marca - restaura
 
 int tokenant;
 long posarq;
@@ -255,7 +255,7 @@ int le_token()
 
 /********************/
 /*                  */
-/*  FIM DO Lï¿½XICO   */
+/*  FIM DO LÃ¯Â¿Â½XICO   */
 /*                  */
 /********************/
 
@@ -280,7 +280,7 @@ void geratemp(char temp[])
 
 /****************/
 /*              */
-/*  EXPRESSï¿½ES  */
+/*  EXPRESSÃ¯Â¿Â½ES  */
 /*              */
 /****************/
 
@@ -289,7 +289,7 @@ int E(char E_p[MAX_COD],char E_c[MAX_COD]);
 int R(char R_hp[MAX_COD],char R_sp[MAX_COD],char R_hc[MAX_COD],char R_sc[MAX_COD]);
 int F(char F_p[MAX_COD],char F_c[MAX_COD]);
 int S(char S_hp[MAX_COD],char S_sp[MAX_COD],char S_hc[MAX_COD],char S_sc[MAX_COD]);
-int Rel(char Rel_p[MAX_COD],char Rel_c[MAX_COD]);
+int Rel(char Rel_c[MAX_COD], char Rel_true[MAX_COD], char Rel_false[MAX_COD]);
 
 // A-> E = A1
 
@@ -299,7 +299,7 @@ int A(char A_p[MAX_COD],char A_c[MAX_COD])
 	char id[100];
 	if (!E(E_p,E_c)) return 0;
 	if (token!=TK_Atrib){strcpy(A_p,E_p);strcpy(A_c,E_c);return 1;}
-	token=le_token(); // consome o sinal de atribuiï¿½ï¿½o
+	token=le_token(); // consome o sinal de atribuiÃ¯Â¿Â½Ã¯Â¿Â½o
 	if (!A(A1_p,A1_c)) return 0;
 	sprintf(A_c,"%s\t%s=%s\n",A1_c,E_p,A1_p);
 	strcpy(A_p,E_p);
@@ -488,7 +488,7 @@ int F(char F_p[MAX_COD],char F_c[MAX_COD])
 		}
 		else
 		{
-			printf("Erro!!! Esperava fecha parï¿½nteses\n");
+			printf("Erro!!! Esperava fecha parÃ¯Â¿Â½nteses\n");
 			return 0;
 		}
 	}
@@ -504,7 +504,7 @@ int F(char F_p[MAX_COD],char F_c[MAX_COD])
 
 int Com(char Com_c[MAX_COD], char labelContinue[MAX_COD],char labelBreak[MAX_COD]);
 int Com_Exp(char Com_c[MAX_COD]);
-int Exp(char Com_c[MAX_COD]);
+int Exp(char Com_c[MAX_COD],char Com_p[MAX_COD]);
 
 int Com_Composto(char Comp_c[],char labelContinue[],char labelBreak[])
 {
@@ -563,7 +563,7 @@ int Com_if(char if_c[], char labelContinue[], char labelBreak[])
 			} 
 			
 			else 		   {
-				printf("Esperava fecha parï¿½nteses\n");
+				printf("Esperava fecha parÃ¯Â¿Â½nteses\n");
 				return 0;
 				
 			}
@@ -571,11 +571,11 @@ int Com_if(char if_c[], char labelContinue[], char labelBreak[])
 		}
 		else{
 			
-			printf("Erro na expressï¿½o do if \n");
+			printf("Erro na expressÃ¯Â¿Â½o do if \n");
 			return 0;
 		}
 		{
-			printf("Esperava abre parï¿½nteses\n");
+			printf("Esperava abre parÃ¯Â¿Â½nteses\n");
 			return 0;
 			
 		}
@@ -583,7 +583,7 @@ int Com_if(char if_c[], char labelContinue[], char labelBreak[])
 	}
 	else
 	{
-		printf("Esperava abre parï¿½nteses\n");
+		printf("Esperava abre parÃ¯Â¿Â½nteses\n");
 		return 0;
 		
 	}
@@ -618,7 +618,7 @@ int Com_while(char if_c[], char labelContinue[], char labelBreak[])
 				}
 				
 				else 		   {
-					printf("Esperava fecha parï¿½nteses\n");
+					printf("Esperava fecha parÃ¯Â¿Â½nteses\n");
 					return 0;
 					
 				}
@@ -626,11 +626,11 @@ int Com_while(char if_c[], char labelContinue[], char labelBreak[])
 			}
 			else{
 				
-				printf("Erro na expressï¿½o do if \n");
+				printf("Erro na expressÃ¯Â¿Â½o do if \n");
 				return 0;
 			}
 		{
-			printf("Esperava abre parï¿½nteses\n");
+			printf("Esperava abre parÃ¯Â¿Â½nteses\n");
 			return 0;
 			
 		}
@@ -638,14 +638,15 @@ int Com_while(char if_c[], char labelContinue[], char labelBreak[])
 	}
 	else
 	{
-		printf("Esperava abre parï¿½nteses\n");
+		printf("Esperava abre parÃ¯Â¿Â½nteses\n");
 		return 0;
 		
 	}
 }
 
 int Com_for(char for_c[],char labelContinue[], char labelBreak[]){
-	char E1_c[MAX_COD],E2_c[MAX_COD],E3_c[MAX_COD];
+	char E1_c[MAX_COD],E2_c[MAX_COD],E3_c[MAX_COD], E3_p[MAX_COD];
+	char Com1_c[MAX_COD];
 	char labellaco[10],labelthen[10],labelfim[10],lbContinue[10],lbBreak[10];
 	geralabel(labellaco);
 	geralabel(labelthen);
@@ -657,22 +658,21 @@ int Com_for(char for_c[],char labelContinue[], char labelBreak[]){
 	{
 		token=le_token();
 		if(Com(E1_c,labellaco,lbBreak)){
-			if (Rel(E2_c,labelthen,labelfim)){
+			if (Com(E2_c,labelthen,labelfim)){
 				
 				token=le_token();
-				if(Exp(E3_c)){
+				if(Exp(E3_c,E3_p)){		
 					if (token==TK_Fecha_Par)
 					{
 						token=le_token();
-						char Com1_c[MAX_COD];
 						if (Com(Com1_c,labellaco,labelfim))
 						{
 							sprintf(for_c,
 								"%s\n%s\n%s\n%s\n%s\n%s\n\tgoto %s\n%s\n",E1_c,labellaco,E2_c,labelthen,Com1_c,E3_c,labellaco,labelfim);
 							return 1;
 						}
-						else 		   {
-							printf("Esperava fecha parï¿½nteses\n");
+						else {
+							printf("Esperava fecha parÃ¯Â¿Â½nteses\n");
 							return 0;
 							
 						}
@@ -680,30 +680,19 @@ int Com_for(char for_c[],char labelContinue[], char labelBreak[]){
 					}
 					else{
 						
-						printf("Erro na expressï¿½o do if \n");
+						printf("Erro na expressÃ¯Â¿Â½o do for \n");
 						return 0;
 					}
 				}
-				else if (token==TK_Fecha_Par)
+				else if (Com(Com1_c,labellaco,labelfim))
 				{
-					token=le_token();
-					char Com1_c[MAX_COD];
-					if (Com(Com1_c,labellaco,labelfim))
-					{
-						sprintf(for_c,
-							"%s\n%s\n%s\n%s\n%s\n%s\n\tgoto %s\n%s\n",E1_c,labellaco,E2_c,labelthen,Com1_c,E3_c,labellaco,labelfim);
-						return 1;
-					}
-					else 		   {
-						printf("Esperava fecha parï¿½nteses\n");
-						return 0;
-						
-					}
-					
+					sprintf(for_c,
+						"%s\n%s\n%s\n%s\n%s\n\tgoto %s\n%s\n",E1_c,labellaco,E2_c,labelthen,Com1_c,labellaco,labelfim);
+					return 1;
 				}
 				else{
 					
-					printf("Erro na expressï¿½o do if \n");
+					printf("Erro na expressÃ¯Â¿Â½o do for \n");
 					return 0;
 				}
 			}
@@ -711,7 +700,7 @@ int Com_for(char for_c[],char labelContinue[], char labelBreak[]){
 	}
 	else
 	{
-		printf("Esperava abre parï¿½nteses\n");
+		printf("Esperava abre parÃ¯Â¿Â½nteses\n");
 		return 0;
 		
 	}
@@ -731,17 +720,16 @@ int Com_Exp(char Com_c[MAX_COD])
 		}
 		else
 		{
-			printf("Faltou ponto-e-vï¿½rgula apï¿½s atribuiï¿½ï¿½o\n");
+			printf("Faltou ponto-e-vÃ¯Â¿Â½rgula apÃ¯Â¿Â½s atribuiÃ¯Â¿Â½Ã¯Â¿Â½o\n");
 			return 0;
 		}
 	}
 	return 0;
 }
 
-int Exp(char Com_c[MAX_COD])
+int Exp(char E_c[MAX_COD], char E_p[MAX_COD])
 {
 	char id[10];
-    char E_c[MAX_COD],E_p[MAX_COD];
 	if (A(E_p,E_c)){
 		return 1;
 	}
