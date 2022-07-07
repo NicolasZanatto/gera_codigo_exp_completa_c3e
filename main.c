@@ -330,6 +330,12 @@ int Rel(char Rel_c[MAX_COD], char Rel_true[MAX_COD], char Rel_false[MAX_COD])
 		}
 		else return 0;
 	}
+	if (token==TK_pv)
+	{
+		token=le_token();// comando vazio
+		strcpy(Rel_c,"");
+		return 1;
+	}
 	return 0;
 }
 
@@ -658,7 +664,7 @@ int Com_for(char for_c[],char labelContinue[], char labelBreak[]){
 	{
 		token=le_token();
 		if(Com(E1_c,labellaco,lbBreak)){
-			if (Com(E2_c,labelthen,labelfim)){
+			if (Rel(E2_c,labelthen,labelfim)){
 				
 				token=le_token();
 				if(Exp(E3_c,E3_p)){		
